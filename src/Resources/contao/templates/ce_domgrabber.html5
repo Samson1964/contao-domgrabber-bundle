@@ -1,0 +1,17 @@
+<div class="<?php echo $this->class; ?> block"<?php echo $this->cssID; ?> style="<?php if ($this->margin): ?><?php echo trim($this->margin); ?><?php endif; ?> <?php if ($this->style): ?><?php echo $this->style; ?><?php endif; ?>">
+
+	<?php if ($this->headline): ?>
+		<<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
+	<?php endif; ?>
+
+	<?php if ($this->css): ?>
+		<style>
+		<?php echo $this->css; ?>
+		</style>
+	<?php endif; ?>
+
+	<div>
+		<?php echo $this->content; ?>
+	</div>
+
+</div>
