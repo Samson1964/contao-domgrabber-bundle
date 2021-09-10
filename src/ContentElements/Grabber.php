@@ -29,7 +29,18 @@ class Grabber extends \ContentElement
 
 	public function generate()
 	{
-		return parent::generate(); 
+		if (TL_MODE == 'BE')
+		{
+			$objTemplate = new \FrontendTemplate('be_domgrabber');
+
+			$objTemplate->wildcard = '### DOMGRABBER ###';
+			$objTemplate->url = $this->domgrabber_url;
+			$objTemplate->element = $this->domgrabber_element;
+
+			return $objTemplate->parse();
+		}
+
+		return parent::generate(); // Weitermachen mit dem Modul
 	}
 
 	/**
@@ -37,22 +48,47 @@ class Grabber extends \ContentElement
 	 */
 	protected function compile()
 	{
-		//$daten = array();
-		//$i = 0;
-		//foreach($this->referenzen as $item)
-		//{
-		//	if($item['active'])
-		//	{
-		//		$i++;
-		//		$daten[] = array
-		//		(
-		//			'nummer' => $i,
-		//			'text'   => $item['url'] ? '<a href="'.$item['url'].'"'.($item['target'] ? ' target="_blank"' : '').'>'.$item['text'].'</a>' : $item['text']
-		//		);
-		//	}
-		//}
-        //
-		//$this->Template->references = $daten;
-		//$this->Template->headline = $this->referenzen_headline ? ($i == 1 ? $GLOBALS['TL_LANG']['tl_content']['references_headline_singular'] :  $GLOBALS['TL_LANG']['tl_content']['references_headline_plural']) : $this->headline;
+		// Parameter zuweisen, wegen Sonderzeichen das Element nach normalen HTML zurück konvertieren
+		$url = $this->domgrabber_url;
+		$element = html_entity_decode($this->domgrabber_element);
+		$urlparam = parse_url($url);
+		
+		// Externe URL laden
+		$html = \SimpleHtmlDom\file_get_html($url, false, null, 0);
+
+		// Links modifizieren
+		foreach($html->find('a') as $item)
+		{
+			if(substr($item->href,0,4) != 'http' && substr($item->href,0,7) != 'mailto:')
+			{
+				$item->href = $urlparam['scheme'].'://'.$urlparam['host'].'/'.$item->href;
+				$item->target = '_blank';
+			}
+		}
+
+		// Bildquellen modifizieren
+		foreach($html->find('img') as $item)
+		{
+			if(substr($item->src,0,4) != 'http')
+				$item->src = $urlparam['scheme'].'://'.$urlparam['host'].'/'.$item->src;
+		}
+
+		// Formulare modifizieren
+		foreach($html->find('form') as $item)
+		{
+			if(substr($item->action,0,4) != 'http' && substr($item->action,0,7) != 'mailto:')
+				$item->action = $urlparam['scheme'].'://'.$urlparam['host'].'/'.$item->action;
+		}
+
+
+		// Gewünschtes Element ausgeben
+		foreach($html->find($element) as $item)
+			$content .= $item->innertext;
+
+		// Template ausgeben
+		$this->Template->content = $content;
+		$this->Template->css = $this->domgrabber_css;
+
+		return;
 	}
 }

@@ -1,0 +1,7 @@
+<?php if ($this->wildcard): ?>
+	<div class="tl_gray">
+		<?php echo $this->wildcard; ?><br />
+		<a href="<?php echo $this->url; ?>" target="_blank"><?php echo $this->url; ?></a><br />
+		(Element: <?php echo $this->element; ?>)
+	</div>
+<?php endif; ?>
