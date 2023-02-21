@@ -1,5 +1,9 @@
 # DOM-Grabber Changelog
 
+## Version 1.0.1 (2023-02-21)
+
+* Change: PHP-Abhängigkeit auf größer 5.6 erweitert, siehe https://github.com/Samson1964/contao-domgrabber-bundle/issues/2
+
 ## Version 1.0.0 (2021-09-10)
 
 * Add: Abhängigkeit axllent/simplehtmldom (Fork des Original simple_html_dom.php)
