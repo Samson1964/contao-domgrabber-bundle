@@ -2,12 +2,12 @@
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2017 Leo Feyer
+ * Copyright (C) 2005-2023 Leo Feyer
  *
- * PHP version 5
+ * PHP version 5-8
  * @copyright  Frank Hoppe
  * @author     Frank Hoppe
- * @package    references
+ * @package    domgrabber
  * @license    LGPL
  * @filesource
  */
@@ -48,10 +48,11 @@ class Grabber extends \ContentElement
 	 */
 	protected function compile()
 	{
-		// Parameter zuweisen, wegen Sonderzeichen das Element nach normalen HTML zurück konvertieren
+		// Parameter zuweisen, wegen Sonderzeichen das Element nach normalen HTML zurÃ¼ck konvertieren
 		$url = $this->domgrabber_url;
 		$element = html_entity_decode($this->domgrabber_element);
 		$urlparam = parse_url($url);
+		$content = ''; // Nimmt den Inhalt der fremden Seite auf
 		
 		// Externe URL laden
 		$html = \SimpleHtmlDom\file_get_html($url, false, null, 0);
@@ -80,11 +81,10 @@ class Grabber extends \ContentElement
 				$item->action = $urlparam['scheme'].'://'.$urlparam['host'].'/'.$item->action;
 		}
 
-
-		// Gewünschtes Element ausgeben
+		// GewÃ¼nschtes Element ausgeben
 		foreach($html->find($element) as $item)
 			$content .= $item->innertext;
-
+		
 		// Template ausgeben
 		$this->Template->content = $content;
 		$this->Template->css = $this->domgrabber_css;

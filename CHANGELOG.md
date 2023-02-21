@@ -1,5 +1,11 @@
 # DOM-Grabber Changelog
 
+## Version 2.0.0 (2023-02-21)
+
+* Add: README.md
+* Fix: Grabber.php tauglich für PHP 8 gemacht
+* Change: Hilfetexte tl_content verbessert
+
 ## Version 1.0.2 (2023-02-21)
 
 * Fix: composer.json -> PHP: ^5.6 || ^7 || ^8
