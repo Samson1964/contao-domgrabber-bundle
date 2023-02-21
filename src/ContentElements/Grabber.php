@@ -14,6 +14,10 @@
 
 namespace Schachbulle\ContaoDomgrabberBundle\ContentElements;
 
+// Symfony-Cache einbinden
+use Symfony\Component\Cache\Adapter\FilesystemAdapter;
+use Symfony\Contracts\Cache\ItemInterface;
+
 /**
  * Class Reference
  *
@@ -48,12 +52,46 @@ class Grabber extends \ContentElement
 	 */
 	protected function compile()
 	{
+		$beginn = microtime(true);
+
+		if($this->includeCache)
+		{
+			// Cache ist eingeschaltet, dann Symfony-Cache aktivieren
+			$cache = new FilesystemAdapter();
+
+			$content = $cache->get('domgrabber_'.$this->domgrabber_url, function(ItemInterface $item)
+			{
+				$item->expiresAfter($this->cache);
+				$value = self::getURL();
+
+				return $value;
+			});
+		}
+		else
+		{
+			// Cache ist nicht eingeschaltet
+			$content = self::getURL();
+		}
+
+		$dauer = microtime(true) - $beginn;
+		//echo "Verarbeitung des Skripts: $dauer Sek.";
+
+		// Template ausgeben
+		$this->Template->skriptdauer = $dauer;
+		$this->Template->content = $content;
+		$this->Template->css = $this->domgrabber_css;
+
+		return;
+	}
+
+	public function getURL()
+	{
+		$value = '';
 		// Parameter zuweisen, wegen Sonderzeichen das Element nach normalen HTML zurück konvertieren
 		$url = $this->domgrabber_url;
 		$element = html_entity_decode($this->domgrabber_element);
 		$urlparam = parse_url($url);
-		$content = ''; // Nimmt den Inhalt der fremden Seite auf
-		
+
 		// Externe URL laden
 		$html = \SimpleHtmlDom\file_get_html($url, false, null, 0);
 
@@ -83,12 +121,8 @@ class Grabber extends \ContentElement
 
 		// Gewünschtes Element ausgeben
 		foreach($html->find($element) as $item)
-			$content .= $item->innertext;
-		
-		// Template ausgeben
-		$this->Template->content = $content;
-		$this->Template->css = $this->domgrabber_css;
+			$value .= $item->innertext;
 
-		return;
+		return $value;
 	}
 }

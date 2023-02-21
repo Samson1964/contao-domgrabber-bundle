@@ -1,5 +1,11 @@
 # DOM-Grabber Changelog
 
+## Version 2.1.0 (2023-02-21)
+
+* Add: Abhängigkeit symfony/cache
+* Add: Grabber.php um Symfony-Cache-Nutzung erweitert
+* Add: Cache-Einstellungen im Inhaltselement
+
 ## Version 2.0.0 (2023-02-21)
 
 * Add: README.md
