@@ -1,5 +1,9 @@
 # DOM-Grabber Changelog
 
+## Version 3.0.0 (2026-01-30)
+
+* Add: Abhängigkeit Contao 5 hinzugefügt
+
 ## Version 2.1.0 (2023-02-21)
 
 * Add: Abhängigkeit symfony/cache

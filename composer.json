@@ -5,14 +5,14 @@
     "license": "LGPL-3.0-or-later",
     "authors": [
         {
-            "name": "Frank Hoppe",
+            "name": "Frank Binding",
             "homepage": "https://www.schachbulle.de/"
         }
     ],
     "require": {
-        "php": "^5.6 || ^7 || ^8",
+        "php": "^7 || ^8",
         "symfony/cache": "*",
-        "contao/core-bundle": "^4",
+        "contao/core-bundle": "^4 || ^5",
         "axllent/simplehtmldom": "^1.6"
     },
     "conflict": {
