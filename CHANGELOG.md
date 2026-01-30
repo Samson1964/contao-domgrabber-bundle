@@ -1,5 +1,9 @@
 # DOM-Grabber Changelog
 
+## Version 3.0.1 (2026-01-30)
+
+* Change: composer.json für Contao 5
+
 ## Version 3.0.0 (2026-01-30)
 
 * Add: Abhängigkeit Contao 5 hinzugefügt

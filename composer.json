@@ -1,7 +1,7 @@
 {
     "name": "schachbulle/contao-domgrabber-bundle",
     "type": "contao-bundle",
-    "description": "DOM-Grabber für Contao 4",
+    "description": "DOM-Grabber für Contao 5",
     "license": "LGPL-3.0-or-later",
     "authors": [
         {
@@ -10,9 +10,11 @@
         }
     ],
     "require": {
-        "php": "^7 || ^8",
+        "php": "^8",
+        "contao/core-bundle": "^5",
+        "components/flag-icon-css": "^3.5",
+        "symfony/dependency-injection": "^6.4",
         "symfony/cache": "*",
-        "contao/core-bundle": "^4 || ^5",
         "axllent/simplehtmldom": "^1.6"
     },
     "conflict": {
