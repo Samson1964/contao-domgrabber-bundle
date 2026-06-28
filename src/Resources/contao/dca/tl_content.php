@@ -15,7 +15,7 @@
  * Palettes
  */
 $GLOBALS['TL_DCA']['tl_content']['palettes']['__selector__'][] = 'includeCache';
-$GLOBALS['TL_DCA']['tl_content']['palettes']['domgrabber'] = '{type_legend},type,headline;{domgrabber_legend},domgrabber_url,domgrabber_element,domgrabber_css;{cache_legend:hide},includeCache;{protected_legend:hide},protected;{expert_legend:hide},guest,cssID;{invisible_legend:hide},invisible,start,stop';
+$GLOBALS['TL_DCA']['tl_content']['palettes']['domgrabber'] = '{type_legend},type,headline;{domgrabber_legend},domgrabber_url,domgrabber_element,domgrabber_css;{cache_legend:hide},includeCache;{protected_legend:hide},protected;{expert_legend:hide},cssID;{invisible_legend:hide},invisible,start,stop';
 $GLOBALS['TL_DCA']['tl_content']['subpalettes']['includeCache'] = 'cache';
 
 /**
