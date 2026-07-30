@@ -1,7 +1,15 @@
 {
     "name": "schachbulle/contao-domgrabber-bundle",
     "type": "contao-bundle",
-    "description": "DOM-Grabber für Contao 5",
+    "description": "Holt Inhalte von externen Webseiten über deren DOM-Struktur und bindet sie in die eigene Seite ein.",
+    "keywords": [
+        "contao",
+        "grabber",
+        "import",
+        "dom",
+        "scraping"
+    ],
+    "homepage": "https://github.com/Samson1964/contao-domgrabber-bundle",
     "license": "LGPL-3.0-or-later",
     "authors": [
         {

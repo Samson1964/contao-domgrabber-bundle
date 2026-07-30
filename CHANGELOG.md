@@ -1,5 +1,9 @@
 # DOM-Grabber Changelog
 
+## Version 3.1.1 (2026-07-30)
+
+* Change: Beschreibung, Keywords und Homepage in der composer.json ergänzt, damit Packagist das Paket verständlich darstellt und über die Suche auffindbar macht
+
 ## Version 3.1.0 (2026-06-28) - mit Claude Code
 
 Vollständige Kompatibilität mit **Contao 5.7** und **PHP 8.4** (Symfony 7) hergestellt.
