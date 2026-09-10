@@ -1,5 +1,12 @@
 # DOM-Grabber Changelog
 
+## Version 3.1.2 (2026-08-02)
+
+* Fix: Ein Inhaltselement ohne eingetragene Adresse beendete die gesamte Seite mit
+  einem Fehler 500 (`ValueError: Path cannot be empty`), weil PHP 8 einen leeren
+  Pfad beim Abruf nicht mehr toleriert. Ein noch nicht ausgefülltes Element bleibt
+  jetzt einfach leer und lässt den Rest der Seite unberührt.
+
 ## Version 3.1.1 (2026-07-30)
 
 * Change: Beschreibung, Keywords und Homepage in der composer.json ergänzt, damit Packagist das Paket verständlich darstellt und über die Suche auffindbar macht

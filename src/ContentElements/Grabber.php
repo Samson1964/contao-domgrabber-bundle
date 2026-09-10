@@ -96,6 +96,17 @@ class Grabber extends ContentElement
 		$value = '';
 		// Parameter zuweisen, wegen Sonderzeichen das Element nach normalem HTML zurück konvertieren
 		$url = (string) $this->domgrabber_url;
+
+		// Ohne Adresse gibt es nichts abzurufen. Die Abfrage muss vor dem Laden
+		// stehen: PHP 8 wirft bei einem leeren Pfad eine ValueError ("Path cannot
+		// be empty"), die als nicht abgefangene Ausnahme die komplette Seite mit
+		// einem Fehler 500 beendet — nicht nur dieses Inhaltselement. Ein frisch
+		// angelegtes, noch nicht ausgefülltes Element bleibt so einfach leer.
+		if ('' === trim($url))
+		{
+			return $value;
+		}
+
 		$element = html_entity_decode((string) $this->domgrabber_element);
 		$urlparam = parse_url($url);
 
