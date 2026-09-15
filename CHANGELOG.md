@@ -1,5 +1,13 @@
 # DOM-Grabber Changelog
 
+## Version 3.1.3 (2026-09-15)
+
+* Fix: Der Cache-Schlüssel wurde nur aus der Adresse gebildet. Zwei Inhaltselemente, die
+  dieselbe Seite mit verschiedenen Selektoren einbinden, teilten sich dadurch einen
+  Cache-Eintrag und zeigten beide den zuerst zwischengespeicherten Ausschnitt; auch die
+  Cachezeit des zuerst gerenderten Elements galt für alle. Der Schlüssel enthält jetzt
+  ID, Adresse und Selektor des Inhaltselements.
+
 ## Version 3.1.2 (2026-08-02)
 
 * Fix: Ein Inhaltselement ohne eingetragene Adresse beendete die gesamte Seite mit

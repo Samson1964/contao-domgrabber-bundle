@@ -20,7 +20,7 @@ CSS für den eingebundenen Inhalt.
 
 ### Cache-Einstellungen
 
-Der eingebettete Inhalt kann auf dem eigenen Server zwischengespeichert werden. Das beschleunigt das Anzeigen des Elements um das bis zu 10.000-fache.
+Der eingebettete Inhalt kann auf dem eigenen Server zwischengespeichert werden. Das beschleunigt das Anzeigen des Elements um das bis zu 10.000-fache. Jedes Inhaltselement hat seinen eigenen Cache-Eintrag; mehrere Elemente mit derselben Adresse beeinflussen sich also nicht.
 
 ## Template-Variablen
 

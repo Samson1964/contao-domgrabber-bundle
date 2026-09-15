@@ -64,9 +64,15 @@ class Grabber extends ContentElement
 			// Cache ist eingeschaltet, dann Symfony-Cache aktivieren
 			$cache = new FilesystemAdapter();
 
-			// Der Cache-Schlüssel darf keine reservierten Zeichen (z. B. ":" oder "/") enthalten,
-			// daher wird die URL als MD5-Hash abgelegt.
-			$content = $cache->get('domgrabber_'.md5((string) $this->domgrabber_url), function (ItemInterface $item) {
+			// Der Cache-Schlüssel muss das Inhaltselement eindeutig bezeichnen. Die Adresse
+			// allein reicht nicht: Zwei Elemente, die dieselbe Seite mit verschiedenen
+			// Selektoren einbinden, teilten sich sonst einen Eintrag und zeigten beide den
+			// Ausschnitt, der zuerst im Cache lag. Auch die Cachezeit des zuerst gerenderten
+			// Elements galt dann für alle. Daher gehen ID, Adresse und Selektor in den
+			// Schlüssel ein. Der MD5-Hash vermeidet reservierte Zeichen wie ":" oder "/".
+			$schluessel = 'domgrabber_'.md5($this->id.'|'.(string) $this->domgrabber_url.'|'.(string) $this->domgrabber_element);
+
+			$content = $cache->get($schluessel, function (ItemInterface $item) {
 				$item->expiresAfter((int) $this->cache);
 
 				return $this->getURL();
